@@ -21,9 +21,13 @@ public class showinfo extends Activity{
         total_account = (TextView) findViewById(R.id.total_account);
         information1 = (TextView) findViewById(R.id.information1);
 
-
-        Log.e("test", intent2.getIntExtra("total_buy", 0) + "");
-        total_account.setText("계좌 평가 금액 : " + intent2.getIntExtra("total_buy", 0) + " 원");
-        total_buy.setText("총 매수 금액 : " + intent2.getIntExtra("account", 0) + " 원");
+        float a = intent2.getIntExtra("total_buy", 0);
+        float b =  intent2.getIntExtra("account", 0);
+        Log.e("test", a+"");
+        Log.e("test", b+"");
+        float c = ((float)a-(float)b)*100/(float)b;
+        total_buy.setText("계좌 평가 금액 : " + intent2.getIntExtra("total_buy", 0) + " 원");
+        total_account.setText("총 매수 금액 : " + intent2.getIntExtra("account", 0) + " 원");
+        information1.setText("수익률 : " + c + " %");
     }
 }

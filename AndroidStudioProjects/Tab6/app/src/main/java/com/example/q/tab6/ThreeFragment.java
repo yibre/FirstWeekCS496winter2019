@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.content.Intent;
@@ -26,11 +27,15 @@ import java.util.ArrayList;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.w3c.dom.Text;
+
 import java.lang.Runnable;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,9 +48,12 @@ public class ThreeFragment extends Fragment {
     Coin_Name john3 = new Coin_Name("John3", "12-20-1998", "Male");
     Coin_Name john4 = new Coin_Name("John4", "12-20-1998", "Male");
     Coin_Name john5 = new Coin_Name("John5", "12-20-1998", "Male");
+    Coin_Name john6 = new Coin_Name("John5", "12-20-1998", "Male");;
     ListView mListView;
     View view;
     CoinListAdapter adapter;
+    ScrollView scrollView;
+
     JSONParser parser = new JSONParser();
 
 
@@ -60,6 +68,7 @@ public class ThreeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_three, container, false);
         mListView = (ListView) view.findViewById(R.id.listView);
         Button button = (Button) view.findViewById(R.id.btn);
+
 
         String BTC_Price1 = "";
         String name = "BTC";
@@ -120,9 +129,9 @@ public class ThreeFragment extends Fragment {
                 JSONObject btc_obj2 = (JSONObject) btc_obj.get("data");
                 String btc_opening_price = (String) btc_obj2.get("opening_price");
                 String btc_closing_price = (String) btc_obj2.get("closing_price");
-                int btc_a = Integer.parseInt(btc_opening_price);
-                int btc_b = Integer.parseInt(btc_closing_price);
-                double btc_Percentage = (btc_b-btc_a)*100/btc_a;
+                float btc_a = Integer.parseInt(btc_opening_price);
+                float btc_b = Integer.parseInt(btc_closing_price);
+                float btc_Percentage = (btc_b-btc_a)*100/btc_a;
                 double btc_Percentage1 = Double.parseDouble(String.format("%.2f",btc_Percentage));
 
                 john1 = new Coin_Name("Bitcoin",btc_closing_price+" 원", Double.toString(btc_Percentage1)+" %");
@@ -134,9 +143,9 @@ public class ThreeFragment extends Fragment {
                 JSONObject eth_obj2 = (JSONObject) eth_obj.get("data");
                 String eth_opening_price = (String) eth_obj2.get("opening_price");
                 String eth_closing_price = (String) eth_obj2.get("closing_price");
-                int eth_a = Integer.parseInt(eth_opening_price);
-                int eth_b = Integer.parseInt(eth_closing_price);
-                double eth_Percentage = (eth_b-eth_a)*100/eth_a;
+                float eth_a = Integer.parseInt(eth_opening_price);
+                float eth_b = Integer.parseInt(eth_closing_price);
+                float eth_Percentage = (eth_b-eth_a)*100/eth_a;
                 double eth_Percentage1 = Double.parseDouble(String.format("%.2f",eth_Percentage));
 
                 john2 = new Coin_Name("Etherium",eth_closing_price+" 원", Double.toString(eth_Percentage1)+" %");
@@ -147,9 +156,9 @@ public class ThreeFragment extends Fragment {
                 JSONObject xrp_obj2 = (JSONObject) xrp_obj.get("data");
                 String xrp_opening_price = (String) xrp_obj2.get("opening_price");
                 String xrp_closing_price = (String) xrp_obj2.get("closing_price");
-                int xrp_a = Integer.parseInt(xrp_opening_price);
-                int xrp_b = Integer.parseInt(xrp_closing_price);
-                double xrp_Percentage = (xrp_b-xrp_a)*100/xrp_a;
+                float xrp_a = Integer.parseInt(xrp_opening_price);
+                float xrp_b = Integer.parseInt(xrp_closing_price);
+                float xrp_Percentage = (xrp_b-xrp_a)*100/xrp_a;
                 double xrp_Percentage1 = Double.parseDouble(String.format("%.2f",xrp_Percentage));
 
                 john3 = new Coin_Name("Riple",xrp_closing_price+" 원", Double.toString(xrp_Percentage1)+" %");
@@ -160,20 +169,47 @@ public class ThreeFragment extends Fragment {
                 JSONObject bch_obj2 = (JSONObject) bch_obj.get("data");
                 String bch_opening_price = (String) bch_obj2.get("opening_price");
                 String bch_closing_price = (String) bch_obj2.get("closing_price");
-                int bch_a = Integer.parseInt(bch_opening_price);
-                int bch_b = Integer.parseInt(bch_closing_price);
-                double bch_Percentage = (bch_b-bch_a)*100/bch_a;
+                float bch_a = Integer.parseInt(bch_opening_price);
+                float bch_b = Integer.parseInt(bch_closing_price);
+                float bch_Percentage = (bch_b-bch_a)*100/bch_a;
+                Log.e("test", bch_Percentage+"");
                 double bch_Percentage1 = Double.parseDouble(String.format("%.2f",bch_Percentage));
 
                 john4 = new Coin_Name("Bitcoin Cash",bch_closing_price+" 원", Double.toString(bch_Percentage1)+" %");
+
+                //set eos info
+                String eos_info = (String) obj.get("EOS");
+                JSONObject eos_obj = (JSONObject) parser.parse(eos_info);
+                JSONObject eos_obj2 = (JSONObject) eos_obj.get("data");
+                String eos_opening_price = (String) eos_obj2.get("opening_price");
+                String eos_closing_price = (String) eos_obj2.get("closing_price");
+                float eos_a = Integer.parseInt(eos_opening_price);
+                float eos_b = Integer.parseInt(eos_closing_price);
+                float eos_Percentage = (eos_b-eos_a)*100/eos_a;
+                Log.e("test", eos_Percentage+"");
+                double eos_Percentage1 = Double.parseDouble(String.format("%.2f",eos_Percentage));
+
+                john5 = new Coin_Name("EOS",eos_closing_price+" 원", Double.toString(eos_Percentage1)+" %");
+                /*
+                //set ltc info
+                String ltc_info = (String) obj.get("LTC");
+                JSONObject ltc_obj = (JSONObject) parser.parse(ltc_info);
+                JSONObject ltc_obj2 = (JSONObject) ltc_obj.get("data");
+                String ltc_opening_price = (String) ltc_obj2.get("opening_price");
+                String ltc_closing_price = (String) ltc_obj2.get("closing_price");
+                float ltc_a = Integer.parseInt(ltc_opening_price);
+                float ltc_b = Integer.parseInt(ltc_closing_price);
+                float ltc_Percentage = (ltc_b-ltc_a)*100/eos_a;
+                Log.e("test", ltc_Percentage+"");
+                double ltc_Percentage1 = Double.parseDouble(String.format("%.2f",eos_Percentage));
+
+                john6 = new Coin_Name("EOS",eos_closing_price+" 원", Double.toString(eos_Percentage1)+" %");
+                */
 
             }catch(ParseException e){
                 e.printStackTrace();
             }
             //BTC_Price1 = BTC_Price;
-
-
-            john5 = new Coin_Name("계좌 검색","", "");
 
 
             coinList.add(john2);
