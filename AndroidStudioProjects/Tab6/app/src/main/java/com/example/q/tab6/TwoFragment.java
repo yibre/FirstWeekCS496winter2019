@@ -5,14 +5,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,15 +30,30 @@ public class TwoFragment extends Fragment {
         ArrayList<File> list;
         GridView gridView;
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.manu_two, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_two) {
+            Toast.makeText(getActivity(), "Clicked on " + item.getTitle(), Toast.LENGTH_SHORT)
+                    .show();
+        }
+        return true;
+    }
+
         public TwoFragment() {
             // Required empty public constructor
         }
 
-
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            // Inflate the layout for this fragment
+
+            setHasOptionsMenu(true); // 메뉴 만들려고 넣음
+
             View view = inflater.inflate(R.layout.fragment_two, container, false); // view는 xml 자바 파일을 붙여넣어준 결과
             gridView = (GridView)view.findViewById(R.id.image_grid); //findViewById 이전에 정의한 class를 붙여줘야함 (in fragment), 자바 뷰는 이러한 컴포넌트들을 가짐
 
@@ -62,6 +80,7 @@ public class TwoFragment extends Fragment {
                 }
             });
             return view;
+
         }
     // fragment에서 기존에 activity에 존재하던 method 붙여넣기
 
@@ -97,7 +116,7 @@ public class TwoFragment extends Fragment {
         }
     }
 
-    private ArrayList<File> imageReader(File externalStorageDirectory) {
+    private ArrayList<File> imageReader(File externalStorageDirectory) { // 이미지를 list로 불러오는 함수
 
         ArrayList<File> b = new ArrayList<>();
 
