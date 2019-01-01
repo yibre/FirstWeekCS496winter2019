@@ -18,6 +18,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".FullImageActivity"></activity>
+        <activity android:name=".login"></activity>
+        <activity android:name=".showinfo"></activity>
+
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
 </manifest>
