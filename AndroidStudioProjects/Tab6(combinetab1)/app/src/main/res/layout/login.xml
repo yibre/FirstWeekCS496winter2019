@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
     <LinearLayout
@@ -24,10 +25,11 @@
             android:layout_height="wrap_content"
             android:hint="secret key" />
     </LinearLayout>
+
     <Button
         android:id="@+id/login"
-        android:layout_width="80dp"
-        android:layout_height="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="로그인"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="164dp" />
