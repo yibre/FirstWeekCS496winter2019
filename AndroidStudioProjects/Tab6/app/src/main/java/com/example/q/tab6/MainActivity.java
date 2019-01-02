@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(getResources().getString(R.string.app_name));
+        toolbar.setTitle("카이디지 1짱팸 우리우정영원히");
+        //toolbar.setTitle(getResources().getString(R.string.app_name));
         setSupportActionBar(toolbar); // 메뉴 아이콘을 위한 함수
 
         tabLayout = findViewById(R.id.tablayout);

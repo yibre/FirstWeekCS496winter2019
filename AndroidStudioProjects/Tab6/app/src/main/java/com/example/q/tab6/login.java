@@ -136,9 +136,9 @@ public class login extends Activity{
                     if(currency.equals("KRW")){
                         j = 1;
                     }else if(currency.equals("BTC")){
-                        j = 4202000;
+                        j = 4267000;
                     }else if(currency.equals("ETH")){
-                        j = 151050;
+                        j = 156800;
                     }else if(currency.equals("EOS")){
                         j = 2885;
                     }

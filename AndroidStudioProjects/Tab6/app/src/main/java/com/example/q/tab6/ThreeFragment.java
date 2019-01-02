@@ -43,12 +43,12 @@ import android.widget.TextView;
 public class ThreeFragment extends Fragment {
 
     private static final String TAG = "MainActivity";
-    Coin_Name john1 = new Coin_Name("John1", "12-20-1998", "Male");
-    Coin_Name john2 = new Coin_Name("John2", "12-20-1998", "Male");
-    Coin_Name john3 = new Coin_Name("John3", "12-20-1998", "Male");
-    Coin_Name john4 = new Coin_Name("John4", "12-20-1998", "Male");
-    Coin_Name john5 = new Coin_Name("John5", "12-20-1998", "Male");
-    Coin_Name john6 = new Coin_Name("John5", "12-20-1998", "Male");;
+    Coin_Name john1 = new Coin_Name("1", "1", "1");
+    Coin_Name john2 = new Coin_Name("1", "1", "1");;
+    Coin_Name john3 = new Coin_Name("1", "1", "1");;
+    Coin_Name john4 = new Coin_Name("1", "1", "1");;
+    Coin_Name john5 = new Coin_Name("1", "1", "1");;
+    //Coin_Name john6;
     ListView mListView;
     View view;
     CoinListAdapter adapter;
@@ -69,16 +69,12 @@ public class ThreeFragment extends Fragment {
         mListView = (ListView) view.findViewById(R.id.listView);
         Button button = (Button) view.findViewById(R.id.btn);
 
-
-        String BTC_Price1 = "";
-        String name = "BTC";
         Runnable r = new MyThreadTask();
         Thread t = new Thread(r);
         t.start();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("test", "sdfsfsdfsd");
                 Intent intent = new Intent(getActivity(), login.class);
                 startActivity(intent);
             }
@@ -98,6 +94,7 @@ public class ThreeFragment extends Fragment {
             String XRP_Price = get_BTC("XRP");
             String BCH_Price = get_BTC("BCH");
             String EOS_Price =  get_BTC("EOS");
+            String LTC_Pirce = get_BTC("LTC");
             Bundle bun = new Bundle();
             JSONObject all_coin = new JSONObject();
 
@@ -106,6 +103,7 @@ public class ThreeFragment extends Fragment {
             all_coin.put("XRP", XRP_Price);
             all_coin.put("BCH", BCH_Price);
             all_coin.put("EOS", EOS_Price);
+            all_coin.put("LTC", LTC_Pirce);
             Log.e("test", all_coin.toString());
 
             bun.putString("HTML_DATA", all_coin.toString());
@@ -172,7 +170,6 @@ public class ThreeFragment extends Fragment {
                 float bch_a = Integer.parseInt(bch_opening_price);
                 float bch_b = Integer.parseInt(bch_closing_price);
                 float bch_Percentage = (bch_b-bch_a)*100/bch_a;
-                Log.e("test", bch_Percentage+"");
                 double bch_Percentage1 = Double.parseDouble(String.format("%.2f",bch_Percentage));
 
                 john4 = new Coin_Name("Bitcoin Cash",bch_closing_price+" 원", Double.toString(bch_Percentage1)+" %");
@@ -186,7 +183,6 @@ public class ThreeFragment extends Fragment {
                 float eos_a = Integer.parseInt(eos_opening_price);
                 float eos_b = Integer.parseInt(eos_closing_price);
                 float eos_Percentage = (eos_b-eos_a)*100/eos_a;
-                Log.e("test", eos_Percentage+"");
                 double eos_Percentage1 = Double.parseDouble(String.format("%.2f",eos_Percentage));
 
                 john5 = new Coin_Name("EOS",eos_closing_price+" 원", Double.toString(eos_Percentage1)+" %");
@@ -199,13 +195,12 @@ public class ThreeFragment extends Fragment {
                 String ltc_closing_price = (String) ltc_obj2.get("closing_price");
                 float ltc_a = Integer.parseInt(ltc_opening_price);
                 float ltc_b = Integer.parseInt(ltc_closing_price);
-                float ltc_Percentage = (ltc_b-ltc_a)*100/eos_a;
-                Log.e("test", ltc_Percentage+"");
-                double ltc_Percentage1 = Double.parseDouble(String.format("%.2f",eos_Percentage));
+                float ltc_Percentage = (ltc_b-ltc_a)*100/ltc_a;
+                double ltc_Percentage1 = Double.parseDouble(String.format("%.2f",ltc_Percentage));
 
-                john6 = new Coin_Name("EOS",eos_closing_price+" 원", Double.toString(eos_Percentage1)+" %");
+                john6 = new Coin_Name("Lite Coin",ltc_closing_price+" 원", Double.toString(ltc_Percentage1)+" %");
+
                 */
-
             }catch(ParseException e){
                 e.printStackTrace();
             }
@@ -216,7 +211,7 @@ public class ThreeFragment extends Fragment {
             coinList.add(john3);
             coinList.add(john4);
             coinList.add(john5);
-            Log.e("test", "aaaaaa");
+            //coinList.add(john6);
             adapter = new CoinListAdapter(getActivity(),R.layout.adapter_view_layout, coinList);
             mListView.setAdapter(adapter);
         }
