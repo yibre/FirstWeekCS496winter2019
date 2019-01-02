@@ -29,19 +29,19 @@
         android:id="@+id/tabOne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="아이스콜드 준호" />
+        android:text="연락처" />
 
     <android.support.design.widget.TabItem
         android:id="@+id/tabTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="도연" />
+        android:text="갤러리" />
 
     <android.support.design.widget.TabItem
         android:id="@+id/tabThree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="abc" />
+        android:text="가상화폐" />
 
     </android.support.design.widget.TabLayout>
 

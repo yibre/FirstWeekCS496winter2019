@@ -48,6 +48,7 @@ public class ThreeFragment extends Fragment {
     Coin_Name john3 = new Coin_Name("1", "1", "1");;
     Coin_Name john4 = new Coin_Name("1", "1", "1");;
     Coin_Name john5 = new Coin_Name("1", "1", "1");;
+    Coin_Name john6 = new Coin_Name("1", "1", "1");
     //Coin_Name john6;
     ListView mListView;
     View view;
@@ -186,7 +187,7 @@ public class ThreeFragment extends Fragment {
                 double eos_Percentage1 = Double.parseDouble(String.format("%.2f",eos_Percentage));
 
                 john5 = new Coin_Name("EOS",eos_closing_price+" 원", Double.toString(eos_Percentage1)+" %");
-                /*
+
                 //set ltc info
                 String ltc_info = (String) obj.get("LTC");
                 JSONObject ltc_obj = (JSONObject) parser.parse(ltc_info);
@@ -199,8 +200,6 @@ public class ThreeFragment extends Fragment {
                 double ltc_Percentage1 = Double.parseDouble(String.format("%.2f",ltc_Percentage));
 
                 john6 = new Coin_Name("Lite Coin",ltc_closing_price+" 원", Double.toString(ltc_Percentage1)+" %");
-
-                */
             }catch(ParseException e){
                 e.printStackTrace();
             }
@@ -211,7 +210,7 @@ public class ThreeFragment extends Fragment {
             coinList.add(john3);
             coinList.add(john4);
             coinList.add(john5);
-            //coinList.add(john6);
+            coinList.add(john6);
             adapter = new CoinListAdapter(getActivity(),R.layout.adapter_view_layout, coinList);
             mListView.setAdapter(adapter);
         }
