@@ -3,13 +3,18 @@ package com.example.q.tab6;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import java.io.BufferedReader;
@@ -22,8 +27,15 @@ import java.util.ArrayList;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.w3c.dom.Text;
+
 import java.lang.Runnable;
+import android.view.View;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,8 +48,7 @@ public class ThreeFragment extends Fragment {
     Coin_Name john3 = new Coin_Name("John3", "12-20-1998", "Male");
     Coin_Name john4 = new Coin_Name("John4", "12-20-1998", "Male");
     Coin_Name john5 = new Coin_Name("John5", "12-20-1998", "Male");
-    Coin_Name john6 = new Coin_Name("John5", "12-20-1998", "Male");
-    Coin_Name john7 = new Coin_Name("1", "1", "1");
+    Coin_Name john6 = new Coin_Name("John5", "12-20-1998", "Male");;
     ListView mListView;
     View view;
     CoinListAdapter adapter;
@@ -58,12 +69,16 @@ public class ThreeFragment extends Fragment {
         mListView = (ListView) view.findViewById(R.id.listView);
         Button button = (Button) view.findViewById(R.id.btn);
 
+
+        String BTC_Price1 = "";
+        String name = "BTC";
         Runnable r = new MyThreadTask();
         Thread t = new Thread(r);
         t.start();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e("test", "sdfsfsdfsd");
                 Intent intent = new Intent(getActivity(), login.class);
                 startActivity(intent);
             }
@@ -76,14 +91,13 @@ public class ThreeFragment extends Fragment {
     class MyThreadTask implements Runnable{
 
         public void run(){
+            //Log.d("test", Integer.toString(Thread.currentThread().getPriority()));
 
             String BTC_Price = get_BTC("BTC");
             String ETH_Price = get_BTC("ETH");
             String XRP_Price = get_BTC("XRP");
             String BCH_Price = get_BTC("BCH");
             String EOS_Price =  get_BTC("EOS");
-            String LTC_Price = get_BTC("LTC");
-            String TRX_Price = get_BTC("TRX");
             Bundle bun = new Bundle();
             JSONObject all_coin = new JSONObject();
 
@@ -92,14 +106,13 @@ public class ThreeFragment extends Fragment {
             all_coin.put("XRP", XRP_Price);
             all_coin.put("BCH", BCH_Price);
             all_coin.put("EOS", EOS_Price);
-            all_coin.put("LTC", LTC_Price);
-            all_coin.put("TRX", TRX_Price);
             Log.e("test", all_coin.toString());
 
             bun.putString("HTML_DATA", all_coin.toString());
             Message msg = handler.obtainMessage();
             msg.setData(bun);
             handler.sendMessage(msg);
+            Log.e("test", "11111");
         }
     }
     Handler handler = new Handler(){
@@ -177,7 +190,7 @@ public class ThreeFragment extends Fragment {
                 double eos_Percentage1 = Double.parseDouble(String.format("%.2f",eos_Percentage));
 
                 john5 = new Coin_Name("EOS",eos_closing_price+" 원", Double.toString(eos_Percentage1)+" %");
-
+                /*
                 //set ltc info
                 String ltc_info = (String) obj.get("LTC");
                 JSONObject ltc_obj = (JSONObject) parser.parse(ltc_info);
@@ -186,28 +199,12 @@ public class ThreeFragment extends Fragment {
                 String ltc_closing_price = (String) ltc_obj2.get("closing_price");
                 float ltc_a = Integer.parseInt(ltc_opening_price);
                 float ltc_b = Integer.parseInt(ltc_closing_price);
-                float ltc_Percentage = (ltc_b-ltc_a)*100/ltc_a;
+                float ltc_Percentage = (ltc_b-ltc_a)*100/eos_a;
                 Log.e("test", ltc_Percentage+"");
-                double ltc_Percentage1 = Double.parseDouble(String.format("%.2f",ltc_Percentage));
+                double ltc_Percentage1 = Double.parseDouble(String.format("%.2f",eos_Percentage));
 
-                john6 = new Coin_Name("Lite Coin",ltc_closing_price+" 원", Double.toString(ltc_Percentage1)+" %");
-
-                //set trx info
-                /*
-                String trx_info = (String) obj.get("TRX");
-                JSONObject trx_obj = (JSONObject) parser.parse(trx_info);
-                JSONObject trx_obj2 = (JSONObject) trx_obj.get("data");
-                String trx_opening_price = (String) trx_obj2.get("opening_price");
-                String trx_closing_price = (String) trx_obj2.get("closing_price");
-                float trx_a = Integer.parseInt(trx_opening_price);
-                float trx_b = Integer.parseInt(trx_closing_price);
-                float trx_Percentage = (trx_b-trx_a)*100/trx_a;
-                Log.e("test", trx_Percentage+"");
-                double trx_Percentage1 = Double.parseDouble(String.format("%.2f",trx_Percentage));
-
-                john7 = new Coin_Name("TRX",trx_closing_price+" 원", Double.toString(trx_Percentage1)+" %");
+                john6 = new Coin_Name("EOS",eos_closing_price+" 원", Double.toString(eos_Percentage1)+" %");
                 */
-
 
             }catch(ParseException e){
                 e.printStackTrace();
@@ -219,8 +216,7 @@ public class ThreeFragment extends Fragment {
             coinList.add(john3);
             coinList.add(john4);
             coinList.add(john5);
-            coinList.add(john6);
-            //coinList.add(john7);
+            Log.e("test", "aaaaaa");
             adapter = new CoinListAdapter(getActivity(),R.layout.adapter_view_layout, coinList);
             mListView.setAdapter(adapter);
         }
@@ -265,6 +261,7 @@ public class ThreeFragment extends Fragment {
             //always remember to close your input and output streams
 
         } catch (Exception e) {
+            Log.e("test", "ddddddd");
             Log.e("test", e.toString());
             return "error";
         }
