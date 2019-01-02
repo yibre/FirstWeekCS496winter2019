@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/total_account"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="25dp"
+        android:textColor="@android:color/black"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/total_buy"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textColor="@android:color/black"
+        android:textSize="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
+        android:text="TextView" />
+    <TextView
+        android:id="@+id/information1"
+        android:layout_marginTop="80dp"
+        android:textSize="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp" />
+
+</RelativeLayout>
